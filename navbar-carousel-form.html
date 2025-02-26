@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #333;
+            padding: 15px 20px;
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 24px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        #menu-toggle {
+            background: none;
+            color: white;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Carousel */
+        .carousel {
+            position: relative;
+            max-width: 20%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: none;
+        }
+
+        .carousel button {
+            position: absolute;
+            margin: 50%;
+            top: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        #prev {
+            left: 10px;
+        }
+
+        #next {
+            right: 20px;
+        }
+
+        /* Form */
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 95%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">MySite</div>
+        <button id="menu-toggle">☰</button>
+        <ul id="nav-menu" class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Carousel -->
+    <div class="carousel">
+        <button id="prev">&#10094;</button>
+        <img src="image1.jpg" alt="Slide 1">
+        <img src="image2.jpg" alt="Slide 2">
+        <img src="image3.jpg" alt="Slide 3">
+        <button id="next">&#10095;</button>
+    </div>
+
+    <!-- Form -->
+    <div class="form-container">
+        <form id="form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <span class="error-message"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <span class="error-message"></span>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <span class="error-message"></span>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Navbar Toggle
+            const menuToggle = document.getElementById("menu-toggle");
+            const navMenu = document.getElementById("nav-menu");
+
+            menuToggle.addEventListener("click", () => {
+                navMenu.classList.toggle("active");
+            });
+
+            // Carousel
+            const carouselImages = document.querySelectorAll(".carousel img");
+            const prevBtn = document.getElementById("prev");
+            const nextBtn = document.getElementById("next");
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                carouselImages.forEach((img, i) => {
+                    img.style.display = i === index ? "block" : "none";
+                });
+            }
+
+            prevBtn.addEventListener("click", () => {
+                currentIndex = (currentIndex === 0) ? carouselImages.length - 1 : currentIndex - 1;
+                showSlide(currentIndex);
+            });
+
+            nextBtn.addEventListener("click", () => {
+                currentIndex = (currentIndex === carouselImages.length - 1) ? 0 : currentIndex + 1;
+                showSlide(currentIndex);
+            });
+
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % carouselImages.length;
+                showSlide(currentIndex);
+            }, 3000);
+
+            showSlide(currentIndex);
+        });
+    </script>
+</body>
+</html>
