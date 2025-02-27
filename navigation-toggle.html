@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navbar</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 10px 20px;
+    }
+
+    .logo {
+    display: flex;
+    align-items: center;
+    }
+
+    .logo img {
+    width: 70px;
+    height: auto;
+    margin-right: 10px;
+    margin-top: 0px;
+    border-radius: 10px;
+    }
+
+    .logo span {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    }
+
+    .navbar .menu {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar .menu li {
+      margin-left: 20px;
+    }
+
+    .navbar .menu li a {
+      color: black;
+      text-decoration: none;
+      padding: 8px 16px;
+    }
+
+    .navbar .menu li a:hover {
+      background-color: #efd13a;
+      border-radius: 4px;
+    }
+
+    /* Hamburger Menu Icon */
+    .navbar .toggle-btn {
+      display: none;
+      font-size: 24px;
+      color: #555;
+      cursor: pointer;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .navbar .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: white;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        margin-top: 30px;
+      }
+
+      .navbar .menu.active {
+        display: flex;
+      }
+
+      .navbar .menu li {
+        margin-top: 10px;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      .navbar .toggle-btn {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar Structure -->
+  <nav class="navbar">
+    <div class="logo"> <img src="travel.png" alt="Marco Travel"> </div>
+    <ul class="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="toggle-btn">&#9776;</div>
+  </nav>
+
+  <!-- JavaScript for Toggle Functionality -->
+  <script>
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const menu = document.querySelector('.navbar .menu');
+
+    toggleBtn.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+
+    // Close the menu when a link is clicked (optional for better UX)
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
